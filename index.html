@@ -1,295 +1,137 @@
-<!DOCTYPE html>
-<html lang="en">
+from pathlib import Path
+
+html = r'''<!DOCTYPE html>
+<html lang="hi">
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-
-<title>RATAN KHATRI VIP</title>
-
-<meta name="theme-color" content="#111827">
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
--webkit-tap-highlight-color:transparent;
-}
-
-body{
-
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-background:#111827;
-color:#fff;
-
-display:flex;
-justify-content:center;
-align-items:center;
-
-min-height:100vh;
-padding:20px;
-
-}
-
-.container{
-
-width:100%;
-max-width:420px;
-text-align:center;
-
-}
-
-.dp{
-
-width:110px;
-height:110px;
-border-radius:50%;
-object-fit:cover;
-
-box-shadow:0 8px 24px rgba(0,0,0,.25);
-
-}
-
-h1{
-
-font-size:28px;
-margin-top:18px;
-font-weight:700;
-
-}
-
-.counter{
-
-margin-top:14px;
-font-size:18px;
-font-weight:700;
-color:#22c55e;
-
-}
-
-.tagline{
-
-margin-top:16px;
-font-size:16px;
-line-height:1.6;
-color:#d1d5db;
-
-}
-
-.join{
-
-display:block;
-
-margin-top:28px;
-
-background:#229ED9;
-color:white;
-
-text-decoration:none;
-
-padding:16px;
-
-border-radius:14px;
-
-font-weight:700;
-
-font-size:18px;
-
-transition:.2s;
-
-}
-
-.join:active{
-
-transform:scale(.97);
-
-}
-
-.redirect{
-
-margin-top:16px;
-font-size:14px;
-color:#9ca3af;
-
-}
-
-.desc{
-
-margin-top:40px;
-text-align:left;
-font-size:15px;
-line-height:1.8;
-color:#e5e7eb;
-
-}
-
-.blank{
-
-height:30px;
-border-bottom:1px solid rgba(255,255,255,.12);
-
-margin-top:10px;
-
-}
-
-</style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Raj Bhai — Community</title>
+  <style>
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      min-height:100vh;
+      font-family:Arial,Helvetica,sans-serif;
+      color:#f5f7fb;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(36,214,190,.12), transparent 35%),
+        radial-gradient(circle at 90% 90%, rgba(230,65,143,.10), transparent 38%),
+        #071416;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:28px 16px;
+    }
+    .card{
+      width:min(100%,630px);
+      padding:58px 46px 42px;
+      border:1px solid rgba(120,135,155,.24);
+      border-radius:42px;
+      background:linear-gradient(145deg,rgba(26,42,45,.96),rgba(18,18,28,.98));
+      box-shadow:0 30px 80px rgba(0,0,0,.42);
+      text-align:center;
+    }
+    .logo{
+      width:238px;height:238px;margin:0 auto 28px;
+      border-radius:50%;
+      display:grid;place-items:center;
+      position:relative;
+      background:#11141c;
+      border:10px solid transparent;
+      background-clip:padding-box;
+    }
+    .logo:before{
+      content:"";position:absolute;inset:-10px;border-radius:50%;
+      background:linear-gradient(135deg,#ff4d9a,#aeb0d0,#28e3c4);
+      z-index:-1;
+    }
+    .logo span{font-size:62px;font-weight:800;letter-spacing:-4px}
+    .dot{
+      position:absolute;right:-8px;bottom:18px;width:34px;height:34px;
+      border-radius:50%;background:#28e3c4;border:4px solid #11141c;
+      box-shadow:0 0 0 10px rgba(40,227,196,.05);
+    }
+    h1{font-size:42px;margin:0 0 8px}
+    .subtitle{
+      color:#969daf;letter-spacing:6px;font-size:18px;margin-bottom:46px
+    }
+    .headline{font-size:30px;font-weight:800;margin-bottom:24px}
+    .headline .a{color:#fff}.headline .b{color:#27dfc1}.headline .c{color:#e28ab5}
+    .description{
+      color:#a4a9b8;font-size:20px;line-height:1.65;margin:0 auto 40px;
+      max-width:520px
+    }
+    .btn{
+      display:flex;align-items:center;justify-content:center;gap:16px;
+      width:100%;min-height:82px;border-radius:25px;
+      background:linear-gradient(100deg,#27ddc1,#26cdb9);
+      color:#071416;text-decoration:none;font-size:27px;font-weight:800;
+      box-shadow:0 18px 35px rgba(39,221,193,.18);
+      transition:.2s transform,.2s filter;
+    }
+    .btn:hover{transform:translateY(-2px);filter:brightness(1.04)}
+    .tg{
+      width:43px;height:43px;border-radius:50%;display:grid;place-items:center;
+      background:#071416;color:#27ddc1;font-size:24px
+    }
+    .divider{height:1px;background:rgba(150,160,180,.18);margin:42px 0}
+    .update{font-size:24px;font-weight:800;margin-bottom:18px}
+    .small{color:#8e95a6;font-size:19px;line-height:1.7;margin:0}
+    .foot{margin-top:42px;color:#626a7d;font-size:16px}
+    @media(max-width:520px){
+      body{padding:20px 10px}
+      .card{padding:42px 26px 32px;border-radius:34px}
+      .logo{width:210px;height:210px}
+      h1{font-size:36px}
+      .subtitle{font-size:15px;letter-spacing:4px}
+      .headline{font-size:25px}
+      .description{font-size:17px}
+      .btn{min-height:72px;font-size:23px}
+      .update{font-size:21px}
+    }
+  </style>
 </head>
-
 <body>
+  <main class="card">
+    <div class="logo">
+      <span>KS</span>
+      <i class="dot"></i>
+    </div>
 
-<div class="container">
+    <h1> Raj Bhai</h1>
+    <div class="subtitle">GAMING &amp; COMMUNITY</div>
 
-<img class="dp" src="RATAN.jpeg" alt="RATAN KHATRI VIP">
+    <div class="headline">
+      <span class="a">Join Our </span>
+      <span class="b">Telegram</span>
+      <span class="c"> Community</span>
+    </div>
 
-<h1>RATAN KHATRI VIP</h1>
+    <p class="description">
+      हमारे community channel से जुड़ें और रोज़ाना सामान्य updates,
+      announcements और community news पाएं।
+    </p>
 
-<div class="counter">
+    <!-- अपना Telegram channel link यहाँ डालें -->
+    <a class="btn" href="https://t.me/+rkYhqCV3lddiNTI1" target="_blank" rel="noopener noreferrer">
+      <span class="tg">➤</span>
+      <span>Join Channel</span>
+    </a>
 
-👥
-<span id="subs">35000</span>
-Subscribers
+    <div class="divider"></div>
 
-</div>
+    <div class="update">📅 Daily Update</div>
+    <p class="small">
+      Join interested members Telegram channel —<br>
+      daily community updates
+    </p>
 
-<div class="tagline">
-
-No. 1 Matka King<br>
-Trusted By 50000+ Members
-
-</div>
-
-<a
-id="joinBtn"
-class="join"
-href="https://t.me/+rkYhqCV3lddiNTI1">
-
-🚀 Join Telegram
-
-</a>
-
-<div class="redirect">
-
-Redirecting in
-<span id="time">10</span>
-seconds...
-
-</div>
-
-<div class="desc">
-    <h3>Description</h3>
-
-    <p>✅ Giving Results For Last 6 Years</p>
-    <p>✅ Community of 50,000+ Members</p>
-    <p>✅ Ek Baar Results Jaroor Dekhe</p>
-    <p>✅ Free Joining</p>
-</div>
-
-</div>
-
-<script>
-
-const telegram="https://t.me/+e0uN_tdyp7NhMTU1";
-
-const counter=document.getElementById("subs");
-
-let subs=35000;
-
-function increase(){
-
-subs++;
-
-counter.textContent=subs.toLocaleString();
-
-const nextDelay=500+Math.random()*1500;
-
-// Between 0.5s and 1.5s
-// Looks much more natural
-
-setTimeout(increase,nextDelay);
-
-}
-
-setTimeout(increase,500);
-
-let seconds=30;
-
-const timer=document.getElementById("time");
-
-const countdown=setInterval(()=>{
-
-seconds--;
-
-timer.textContent=seconds;
-
-if(seconds<=0){
-
-clearInterval(countdown);
-
-location.href=telegram;
-
-}
-
-},1000);
-
-document.getElementById("joinBtn").addEventListener("click",()=>{
-
-clearInterval(countdown);
-
-});
-
-</script>
-
-<script>
-
-window.addEventListener("load",()=>{
-
-const loadPixel=()=>{
-
-!function(f,b,e,v,n,t,s)
-{
-if(f.fbq)return;
-n=f.fbq=function(){
-n.callMethod?
-n.callMethod.apply(n,arguments):
-n.queue.push(arguments)
-};
-if(!f._fbq)f._fbq=n;
-n.push=n;
-n.loaded=!0;
-n.version='2.0';
-n.queue=[];
-t=b.createElement(e);
-t.async=!0;
-t.src='https://connect.facebook.net/en_US/fbevents.js';
-s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s);
-}(window,document,'script');
-
-fbq('init','1647679169651394');
-fbq('track','PageView');
-
-document.getElementById("joinBtn").addEventListener("click",function(){
-fbq('track','Lead');
-});
-
-};
-
-if("requestIdleCallback" in window){
-
-requestIdleCallback(loadPixel);
-
-}else{
-
-setTimeout(loadPixel,1500);
-
-}
-
-});
-
-</script>
-
+    <div class="foot">Tap the button above to join instantly</div>
+  </main>
 </body>
 </html>
+'''
+
+path = Path("/mnt/data/index.html")
+path.write_text(html, encoding="utf-8")
+print(f"Created: {path}")
